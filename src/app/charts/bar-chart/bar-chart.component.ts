@@ -23,7 +23,7 @@ export class BarChartComponent implements OnInit {
   public barChartLabels: string[] = SAMPLE_LABELS;
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
-  public barChartPlugins = [pluginDataLabels];
+  // public barChartPlugins = [pluginDataLabels];
 
   public barChartData: any[] = SAMPLE_DATA;
   constructor() {}
