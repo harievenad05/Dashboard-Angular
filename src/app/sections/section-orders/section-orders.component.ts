@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { order } from '../../shared/order';
 import * as moment from 'moment';
+import { ButtonRendererComponent } from 'src/app/common/renderer/button-renderer.component';
+import { GridOptions } from 'ag-grid-community';
 
 @Component({
   selector: 'app-section-orders',
@@ -19,11 +21,25 @@ export class SectionOrdersComponent implements OnInit {
     {headerName: 'Delivered', field: 'fulfilled', sortable: true, filter: true, autoHeight: true, cellRenderer: (data) => {
       return moment(data.fulfilled).format('MMMM Do YYYY')
   }},
-    {headerName: 'Status', field: 'status', sortable: true, filter: true, autoHeight: true},
+    {headerName: 'Status', field: 'status', sortable: true, filter: true, autoHeight: true, width: 102, suppressSizeToFit: false},
+    {
+      headerName: 'Action',
+      cellRenderer: 'buttonRenderer',
+      width: 98, 
+      suppressSizeToFit: false,
+      cellRendererParams: {
+        onEditClick: this.onEditBtnClick.bind(this),
+        onDeleteClick: this.onDeleteBtnClick.bind(this)
+      },
+      autoHeight: true
+    },
 
   ];
 
   rowData: any;
+  frameworkComponents: any;
+  gridOptions: any;
+  paginationPageSize: number;
 
   orders: order[] = [
     {
@@ -92,9 +108,25 @@ export class SectionOrdersComponent implements OnInit {
       status: 'Complete',
     },
   ];
-  constructor() {}
+  constructor(){
+    this.frameworkComponents = {
+      buttonRenderer: ButtonRendererComponent,
+    }
+    
+  }
 
   ngOnInit(): void {
+    this.paginationPageSize = 10;
     this.rowData = this.orders
+  }
+  
+
+  onEditBtnClick(e) {
+    console.log(e.rowData);
+    alert(e.rowData.customer.name)
+  }
+
+  onDeleteBtnClick(e){
+    console.log(e.rowData);
   }
 }
