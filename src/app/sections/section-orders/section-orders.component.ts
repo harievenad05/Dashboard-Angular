@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { order } from '../../shared/order';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-section-orders',
@@ -7,6 +8,23 @@ import { order } from '../../shared/order';
   styleUrls: ['./section-orders.component.scss'],
 })
 export class SectionOrdersComponent implements OnInit {
+
+  columnDefs = [
+    {headerName: 'ID', field: 'id', sortable: true, filter: true, autoHeight: true,  width: 80, suppressSizeToFit: false},
+    {headerName: 'Customers', field: 'customer.name', sortable: true, filter: true, autoHeight: true, width: 180,suppressSizeToFit: false},
+    {headerName: 'Amount', field: 'total', sortable: true, filter: true, autoHeight: true,  width: 102, suppressSizeToFit: false},
+    {headerName: 'Order Placed', field: 'placed', sortable: true, filter: true, autoHeight: true, cellRenderer: (data) => {
+      return moment(data.placed).format('MMMM Do YYYY')
+  }},
+    {headerName: 'Delivered', field: 'fulfilled', sortable: true, filter: true, autoHeight: true, cellRenderer: (data) => {
+      return moment(data.fulfilled).format('MMMM Do YYYY')
+  }},
+    {headerName: 'Status', field: 'status', sortable: true, filter: true, autoHeight: true},
+
+  ];
+
+  rowData: any;
+
   orders: order[] = [
     {
       id: 1,
@@ -76,5 +94,7 @@ export class SectionOrdersComponent implements OnInit {
   ];
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.rowData = this.orders
+  }
 }

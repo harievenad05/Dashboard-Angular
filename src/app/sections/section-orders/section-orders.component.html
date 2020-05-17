@@ -2,26 +2,11 @@
   <h2 style="color: #191f26; margin-bottom: 15px;">
     Latest Orders
   </h2>
-  <table class="table table-inverse table-hover">
-    <thead class="thead-dark">
-      <tr>
-        <th>ID</th>
-        <th>Customers</th>
-        <th>Amount</th>
-        <th>Order Placed</th>
-        <th>Order Delivered</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let order of orders">
-        <td>{{ order.id }}</td>
-        <td>{{ order.customer.name }}</td>
-        <td>{{ order.total }}</td>
-        <td>{{ order.placed | date: "mediumDate" }}</td>
-        <td>{{ order.fulfilled | date: "mediumDate" }}</td>
-        <td>Status</td>
-      </tr>
-    </tbody>
-  </table>
+    <ag-grid-angular
+    style="width: 87%; height: 420px;"
+    class="ag-theme-balham"
+    [columnDefs]="columnDefs"
+    [rowData]="rowData"
+  >
+  </ag-grid-angular>
 </div>

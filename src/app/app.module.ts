@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
+import {AgGridModule} from 'ag-grid-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { ServerComponent } from './server/server/server.component';
+import { ButtonRendererComponent } from './common/renderer/button-renderer.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,7 @@ import { ServerComponent } from './server/server/server.component';
     PieChartComponent,
     ServerComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ChartsModule],
+  imports: [BrowserModule, AppRoutingModule, ChartsModule, AgGridModule.withComponents([ButtonRendererComponent])],
   providers: [],
   bootstrap: [AppComponent],
 })
