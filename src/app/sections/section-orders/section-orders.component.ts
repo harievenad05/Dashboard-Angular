@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { order } from '../../shared/order';
 import * as moment from 'moment';
 import { ButtonRendererComponent } from 'src/app/common/renderer/button-renderer.component';
 import { GridOptions } from 'ag-grid-community';
+import { Order, OrderData } from 'src/app/shared/order/order.model';
+import { OrderService } from 'src/app/shared/order/order.service';
 
 @Component({
   selector: 'app-section-orders',
@@ -12,15 +13,11 @@ import { GridOptions } from 'ag-grid-community';
 export class SectionOrdersComponent implements OnInit {
 
   columnDefs = [
-    {headerName: 'ID', field: 'id', sortable: true, filter: true, autoHeight: true,  width: 80, suppressSizeToFit: false},
-    {headerName: 'Customers', field: 'customer.name', sortable: true, filter: true, autoHeight: true, width: 180,suppressSizeToFit: false},
+    {headerName: 'ID', field: 'order_id', sortable: true, filter: true, autoHeight: true,  width: 80, suppressSizeToFit: false},
+    {headerName: 'Customers', field: 'name', sortable: true, filter: true, autoHeight: true, width: 180,suppressSizeToFit: false},
     {headerName: 'Amount', field: 'total', sortable: true, filter: true, autoHeight: true,  width: 102, suppressSizeToFit: false},
-    {headerName: 'Order Placed', field: 'placed', sortable: true, filter: true, autoHeight: true, cellRenderer: (data) => {
-      return moment(data.placed).format('MMMM Do YYYY')
-  }},
-    {headerName: 'Delivered', field: 'fulfilled', sortable: true, filter: true, autoHeight: true, cellRenderer: (data) => {
-      return moment(data.fulfilled).format('MMMM Do YYYY')
-  }},
+    {headerName: 'Order Placed', field: 'placed', sortable: true, filter: true, autoHeight: true},
+    {headerName: 'Delivered', field: 'completed', sortable: true, filter: true, autoHeight: true},
     {headerName: 'Status', field: 'status', sortable: true, filter: true, autoHeight: true, width: 102, suppressSizeToFit: false},
     {
       headerName: 'Action',
@@ -40,75 +37,10 @@ export class SectionOrdersComponent implements OnInit {
   frameworkComponents: any;
   gridOptions: any;
   paginationPageSize: number;
+  receivedOrderData: OrderData;
+  orders: Order[];
 
-  orders: order[] = [
-    {
-      id: 1,
-      customer: {
-        id: 1,
-        name: 'ABC group',
-        email: 'abc@example.com',
-        state: 'CO',
-      },
-      total: 150,
-      placed: new Date(2017, 12, 1),
-      fulfilled: new Date(2017, 12, 2),
-      status: 'Complete',
-    },
-    {
-      id: 2,
-      customer: {
-        id: 2,
-        name: 'XYZ holdings',
-        email: 'xyz@example.com',
-        state: 'CO',
-      },
-      total: 230,
-      placed: new Date(2017, 12, 1),
-      fulfilled: new Date(2017, 12, 3),
-      status: 'Complete',
-    },
-    {
-      id: 3,
-      customer: {
-        id: 3,
-        name: 'Johndou group',
-        email: 'accounts@johndou.com',
-        state: 'CO',
-      },
-      total: 450,
-      placed: new Date(2017, 12, 4),
-      fulfilled: new Date(2017, 12, 4),
-      status: 'Complete',
-    },
-    {
-      id: 4,
-      customer: {
-        id: 1,
-        name: 'ABC group',
-        email: 'abc@example.com',
-        state: 'CO',
-      },
-      total: 950,
-      placed: new Date(2017, 12, 6),
-      fulfilled: new Date(2017, 12, 6),
-      status: 'Complete',
-    },
-    {
-      id: 5,
-      customer: {
-        id: 1,
-        name: 'ABC group',
-        email: 'abc@example.com',
-        state: 'CO',
-      },
-      total: 1078,
-      placed: new Date(2017, 12, 1),
-      fulfilled: new Date(2017, 12, 2),
-      status: 'Complete',
-    },
-  ];
-  constructor(){
+  constructor(private orderService: OrderService){
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
     }
@@ -118,12 +50,25 @@ export class SectionOrdersComponent implements OnInit {
   ngOnInit(): void {
     this.paginationPageSize = 10;
     this.rowData = this.orders
+    this.getAllOrders()
+  }
+
+  getAllOrders():void {
+    this.orderService.getOrders().subscribe((res: OrderData) => {
+      console.log(res);
+      
+      this.receivedOrderData = res
+      if(this.receivedOrderData.success == 0){
+        console.log('Not found');
+      }
+      this.rowData = this.receivedOrderData.data;
+    }, (err) => {console.log(err)})
   }
   
 
   onEditBtnClick(e) {
     console.log(e.rowData);
-    alert(e.rowData.customer.name)
+    alert(e.rowData.name)
   }
 
   onDeleteBtnClick(e){

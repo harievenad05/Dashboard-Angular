@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import {AgGridModule} from 'ag-grid-angular';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,7 +30,12 @@ import { ButtonRendererComponent } from './common/renderer/button-renderer.compo
     PieChartComponent,
     ServerComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, ChartsModule, AgGridModule.withComponents([ButtonRendererComponent])],
+  imports: [
+    BrowserModule, 
+    AppRoutingModule, 
+    ChartsModule,
+    HttpClientModule,
+    AgGridModule.withComponents([ButtonRendererComponent])],
   providers: [],
   bootstrap: [AppComponent],
 })
