@@ -14,21 +14,22 @@ export class SectionOrdersComponent implements OnInit {
 
   columnDefs = [
     {headerName: 'ID', field: 'order_id', sortable: true, filter: true, autoHeight: true,  width: 80, suppressSizeToFit: false},
-    {headerName: 'Customers', field: 'name', sortable: true, filter: true, autoHeight: true, width: 180,suppressSizeToFit: false},
-    {headerName: 'Amount', field: 'total', sortable: true, filter: true, autoHeight: true,  width: 102, suppressSizeToFit: false},
+    {headerName: 'Customers', field: 'name', sortable: true, filter: true, autoHeight: true},
+    {headerName: 'Amount', field: 'total', sortable: true, filter: true, autoHeight: true},
     {headerName: 'Order Placed', field: 'placed', sortable: true, filter: true, autoHeight: true, valueFormatter: this.dateFormatter, width: 200, suppressSizeToFit: false},
     {headerName: 'Delivered', field: 'completed', sortable: true, filter: true, autoHeight: true, valueFormatter: this.dateFormatter, width: 200, suppressSizeToFit: false},
     {headerName: 'Status', field: 'status', sortable: true, filter: true, autoHeight: true, width: 169, suppressSizeToFit: false},
     {
       headerName: 'Action',
       cellRenderer: 'buttonRenderer',
-      width: 98, 
+      width: 150, 
       suppressSizeToFit: false,
       cellRendererParams: {
         onEditClick: this.onEditBtnClick.bind(this),
         onDeleteClick: this.onDeleteBtnClick.bind(this)
       },
-      autoHeight: true
+      autoHeight: true,
+      
     },
 
   ];
@@ -44,19 +45,21 @@ export class SectionOrdersComponent implements OnInit {
   paginationPageSize: number;
   receivedOrderData: OrderData;
   orders: Order[];
+  defaultColDef: any;
+  gridApi: any;
 
   constructor(private orderService: OrderService){
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
     }
-    
+    this.defaultColDef = { resizable: true };
   }
 
   ngOnInit(): void {
     this.paginationPageSize = 15;
     this.rowData = this.orders
-    this.getAllOrders()
-    this.gridLayout()
+    this.getAllOrders();
+    this.gridLayout();
   }
 
   getAllOrders():void {
@@ -70,13 +73,26 @@ export class SectionOrdersComponent implements OnInit {
     }, (err) => {console.log(err)})
   }
 
+  onResize(event) {
+    console.log(event)
+    event.target.innerWidth;
+    this.gridLayout();
+  }
+
   gridLayout(): void {
     this.gridOptions = <GridOptions>{
       onGridReady: (params) => {  
-        params.api.sizeColumnsToFit(); 
+        this.gridApi = params.api;
+        window.onresize = () => {
+          this.gridApi.sizeColumnsToFit();
+      }
         this.setWidthAndHeight('100%', '100%');
       }
     }
+  }
+
+  onFirstDataRendered(params) {
+    params.api.sizeColumnsToFit();
   }
   
   setWidthAndHeight(width, height) {
@@ -84,7 +100,7 @@ export class SectionOrdersComponent implements OnInit {
         width: width,
         height: height
     };
-}
+  }
   dateFormatter(params) {
     return moment(params.value).format('MMMM Do YYYY');
   }

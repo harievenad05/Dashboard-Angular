@@ -1,4 +1,4 @@
-<div class="section-container">
+<div class="section-container" (window:resize)="onResize($event)">
   <h2 style="color: #191f26; margin-bottom: 15px;">
     Latest Orders
   </h2>
@@ -11,6 +11,8 @@
     [pagination]="true"
     [paginationPageSize]="paginationPageSize"
     [gridOptions]="gridOptions"
+    (firstDataRendered)="onFirstDataRendered($event)"
+    [defaultColDef]="defaultColDef"
   >
   </ag-grid-angular>
 </div>
