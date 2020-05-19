@@ -16,9 +16,9 @@ export class SectionOrdersComponent implements OnInit {
     {headerName: 'ID', field: 'order_id', sortable: true, filter: true, autoHeight: true,  width: 80, suppressSizeToFit: false},
     {headerName: 'Customers', field: 'name', sortable: true, filter: true, autoHeight: true, width: 180,suppressSizeToFit: false},
     {headerName: 'Amount', field: 'total', sortable: true, filter: true, autoHeight: true,  width: 102, suppressSizeToFit: false},
-    {headerName: 'Order Placed', field: 'placed', sortable: true, filter: true, autoHeight: true},
-    {headerName: 'Delivered', field: 'completed', sortable: true, filter: true, autoHeight: true},
-    {headerName: 'Status', field: 'status', sortable: true, filter: true, autoHeight: true, width: 102, suppressSizeToFit: false},
+    {headerName: 'Order Placed', field: 'placed', sortable: true, filter: true, autoHeight: true, valueFormatter: this.dateFormatter, width: 200, suppressSizeToFit: false},
+    {headerName: 'Delivered', field: 'completed', sortable: true, filter: true, autoHeight: true, valueFormatter: this.dateFormatter, width: 200, suppressSizeToFit: false},
+    {headerName: 'Status', field: 'status', sortable: true, filter: true, autoHeight: true, width: 169, suppressSizeToFit: false},
     {
       headerName: 'Action',
       cellRenderer: 'buttonRenderer',
@@ -32,6 +32,11 @@ export class SectionOrdersComponent implements OnInit {
     },
 
   ];
+
+  style = {
+    width: '100%',
+    height: '100%'
+  };
 
   rowData: any;
   frameworkComponents: any;
@@ -48,15 +53,15 @@ export class SectionOrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.paginationPageSize = 10;
+    this.paginationPageSize = 15;
     this.rowData = this.orders
     this.getAllOrders()
+    this.gridLayout()
   }
 
   getAllOrders():void {
     this.orderService.getOrders().subscribe((res: OrderData) => {
       console.log(res);
-      
       this.receivedOrderData = res
       if(this.receivedOrderData.success == 0){
         console.log('Not found');
@@ -64,7 +69,25 @@ export class SectionOrdersComponent implements OnInit {
       this.rowData = this.receivedOrderData.data;
     }, (err) => {console.log(err)})
   }
+
+  gridLayout(): void {
+    this.gridOptions = <GridOptions>{
+      onGridReady: (params) => {  
+        params.api.sizeColumnsToFit(); 
+        this.setWidthAndHeight('100%', '100%');
+      }
+    }
+  }
   
+  setWidthAndHeight(width, height) {
+    this.style = {
+        width: width,
+        height: height
+    };
+}
+  dateFormatter(params) {
+    return moment(params.value).format('MMMM Do YYYY');
+  }
 
   onEditBtnClick(e) {
     console.log(e.rowData);
