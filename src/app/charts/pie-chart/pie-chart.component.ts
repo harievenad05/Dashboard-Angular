@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChartType } from 'chart.js';
 
 @Component({
@@ -20,8 +20,16 @@ export class PieChartComponent implements OnInit {
     },
   ];
   pieChartType: ChartType = 'doughnut';
+  @Input() inputData: any;
+  @Input() limit: number;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.parseChartData(this.inputData, this.limit);
+  }
+
+  parseChartData(res: any, limit?: number){
+    console.log(res);
+  }
 }

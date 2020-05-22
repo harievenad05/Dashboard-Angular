@@ -10,7 +10,7 @@ import { OrderData, Order } from 'src/app/shared/order/order.model';
 export class SectionSalesComponent implements OnInit {
 
   orderDataByCustomer: any;
-  salesDataByState: any;
+  orderDataByState: any;
   orders: Order[];
   receivedOrderData: OrderData;
 
@@ -29,14 +29,13 @@ export class SectionSalesComponent implements OnInit {
       localChartStateData.map(x => {
         newOrderStateData.push({'state': x[0], total: x[1]});
       });
-      console.log(newOrderStateData);
+      this.orderDataByState = newOrderStateData;
 
       const newOrderCustomerData = [];
       localChartCustomerData.map(x => {
-        newOrderCustomerData.push({'name': x[0], total: x[1]})
-      })
-      console.log(newOrderCustomerData.splice(0, 5));
-      
+        newOrderCustomerData.push({'name': x[0], total: x[1]});
+      });
+      this.orderDataByCustomer = newOrderCustomerData.splice(0, 5);
 
     }, (err) => {console.log(err)});
   };
@@ -58,7 +57,7 @@ export class SectionSalesComponent implements OnInit {
         p[key][1] += e[1];
       }
       return r;
-    }, [])
+    }, []);
     return stateData;
   }
 
