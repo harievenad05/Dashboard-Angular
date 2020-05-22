@@ -2,6 +2,7 @@ export interface Order {
     order_id?: number;
     customer_id?: number;
     name: string;
+    state: string;
     total: number;
     placed: Date;
     completed: Date;

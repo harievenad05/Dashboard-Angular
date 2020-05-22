@@ -45,8 +45,6 @@ export class BarChartComponent implements OnInit {
   getAllOrders():void {
     this.orderService.getOrders().subscribe((res) => {
       const localChartData = this.getChartData(res);
-      console.log(localChartData.map(x => x));
-      
       this.barChartLabels = localChartData.map(x => x[0]);
       this.barChartData = [{'data': localChartData.map(x => x[1]), 'label': 'Sales'}]
     }, (err) => {console.log(err)});
@@ -73,9 +71,7 @@ export class BarChartComponent implements OnInit {
       }
       return r;
     }, []);
-
     return chartData;
-    
   }
 
 
