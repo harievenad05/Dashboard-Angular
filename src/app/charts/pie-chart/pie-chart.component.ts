@@ -1,5 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChartType } from 'chart.js';
+import _ from 'lodash';
+
+import { THEME_COLORS } from '../../shared/themes/theme.colors'
+
+const theme = 'Bright';
 
 @Component({
   selector: 'app-pie-chart',
@@ -7,15 +12,11 @@ import { ChartType } from 'chart.js';
   styleUrls: ['./pie-chart.component.scss'],
 })
 export class PieChartComponent implements OnInit {
-  pieChartData: number[] = [350, 450, 120];
-  pieChartLabels: string[] = [
-    'ABC Logistics',
-    'Delicious Bakery',
-    'XYZ Holdings',
-  ];
+  pieChartData: number[];
+  pieChartLabels: string[];
   colors: any[] = [
     {
-      backgroundColor: ['#26547c', '#ff6b6b', '#ffd166'],
+      backgroundColor: this.themeColors(theme),
       borderColor: '#111',
     },
   ];
@@ -30,6 +31,15 @@ export class PieChartComponent implements OnInit {
   }
 
   parseChartData(res: any, limit?: number){
-    console.log(res);
+    const allData = res.slice(0, limit);
+    console.log(allData);
+    this.pieChartData = allData.map(x => _.values(x)[1]);
+    this.pieChartLabels = allData.map(x => _.values(x)[0]);
+
+  }
+
+  themeColors(setName: string): string[] {
+    const c = THEME_COLORS.slice(0).find(set => set.name === setName).colorSet;
+    return c;
   }
 }
