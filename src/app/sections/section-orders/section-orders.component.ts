@@ -57,7 +57,7 @@ export class SectionOrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.paginationPageSize = 15;
-    this.rowData = this.orders
+    this.rowData = this.orders;
     this.getAllOrders();
     this.gridLayout();
   }
@@ -65,16 +65,16 @@ export class SectionOrdersComponent implements OnInit {
   getAllOrders():void {
     this.orderService.getOrders().subscribe((res: OrderData) => {
       console.log(res);
-      this.receivedOrderData = res
+      this.receivedOrderData = res;
       if(this.receivedOrderData.success == 0){
         console.log('Not found');
       }
       this.rowData = this.receivedOrderData.data;
-    }, (err) => {console.log(err)})
+    }, (err) => {console.log(err)});
   }
 
   onResize(event) {
-    console.log(event)
+    console.log(event);
     event.target.innerWidth;
     this.gridLayout();
   }
@@ -106,8 +106,8 @@ export class SectionOrdersComponent implements OnInit {
   }
 
   onEditBtnClick(e) {
-    console.log(e.rowData);
-    alert(e.rowData.name)
+    console.log(e.rowData); 
+    alert(e.rowData.name);
   }
 
   onDeleteBtnClick(e){
