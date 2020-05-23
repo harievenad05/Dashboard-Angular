@@ -16,6 +16,8 @@ import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { ServerComponent } from './server/server/server.component';
 import { ButtonRendererComponent } from './common/renderer/button-renderer.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './shared/material-module';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ButtonRendererComponent } from './common/renderer/button-renderer.compo
     AppRoutingModule, 
     ChartsModule,
     HttpClientModule,
-    AgGridModule.withComponents([ButtonRendererComponent])],
+    MaterialModule,
+    AgGridModule.withComponents([ButtonRendererComponent]),
+    BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
