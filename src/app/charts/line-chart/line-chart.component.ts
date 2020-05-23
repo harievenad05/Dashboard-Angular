@@ -43,15 +43,22 @@ export class LineChartComponent implements OnInit {
 
   getAllOrders():void {
     this.orderService.getOrders().subscribe((res: OrderData) => {
-      const groupedCustomerWithOrderArray = this.getChartCustomerData(res)
-      const groupedThreeCustomers = groupedCustomerWithOrderArray.slice(0, 3)
-      this.lineChartData = groupedThreeCustomers;
+      const groupedCustomerWithOrderArray = this.getChartCustomerData(res);
+      const chartLabelArray = this.getChartOrderLabel(res); 
+      console.log(chartLabelArray.slice(0,3))
+      const chartLblData = chartLabelArray.map(x => x.placed)
+      const converedDate = chartLblData[0].map(x => moment(new Date(x)).format('MMM YY'))
+      console.log(converedDate);
+      
+      this.lineChartData = chartLabelArray.slice(0, 1);
+      this.lineChartLabels = converedDate;
+
     },(err) => {console.log(err)}); 
   }
 
   getChartCustomerData(res: OrderData){
     this.receivedOrderData = res;
-    const orderData = this.receivedOrderData.data
+    const orderData = this.receivedOrderData.data;
     const groups = {};
     for (let i = 0; i < orderData.length; i++){
       let groupName = orderData[i].name;
@@ -68,6 +75,20 @@ export class LineChartComponent implements OnInit {
     return sortedArr.reverse();
   }
 
+  getChartOrderLabel(res: OrderData){
+    this.receivedOrderData = res;
+    const orderData = this.receivedOrderData.data
+
+    const groupeddata = orderData.map((item)=>  item.name ).filter((item, i, ar) => ar.indexOf(item) === i).map(item=>{
+      let new_total = orderData.filter(itm => itm.name == item).map(itm=>itm.total);
+      let new_date = orderData.filter(itm => itm.name == item).map(itm=>itm.placed);
+      return {label:item, data:new_total, placed: new_date}
+    });
+
+    const sortedAndGroupedDataWithDate = groupeddata.sort(this.sortHighestValueCustomers);
+    return sortedAndGroupedDataWithDate.reverse();
+  }
+
   sortHighestValueCustomers(a, b){
     let aArr = a.data.reduce((r, e) => r + e, 0)
       let bArr = b.data.reduce((r, e) => r + e, 0)
@@ -76,4 +97,5 @@ export class LineChartComponent implements OnInit {
       console.log(aArr, bArr)
       return 0;
   }
+
 }
