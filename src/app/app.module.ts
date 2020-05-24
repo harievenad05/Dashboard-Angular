@@ -9,8 +9,8 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SectionSalesComponent } from './sections/section-Dashboard/section-sales.component';
-import { SectionOrdersComponent } from './sections/section-orders/section-orders.component';
-import { SectionHealthComponent } from './sections/section-health/section-health.component';
+import { SectionOrdersComponent } from './sections/section-Boq/section-orders.component';
+import { SectionProjectComponent } from './sections/section-project/section-project.component';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { LineChartComponent } from './charts/line-chart/line-chart.component';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
@@ -18,7 +18,7 @@ import { ServerComponent } from './server/server/server.component';
 import { ButtonRendererComponent } from './common/renderer/button-renderer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material-module';
-import { OrderEditComponent } from './sections/section-orders/order-edit/order-edit.component';
+import { OrderEditComponent } from './sections/section-Boq/boq-edit/order-edit.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { OrderEditComponent } from './sections/section-orders/order-edit/order-e
     SidebarComponent,
     SectionSalesComponent,
     SectionOrdersComponent,
-    SectionHealthComponent,
+    SectionProjectComponent,
     BarChartComponent,
     LineChartComponent,
     PieChartComponent,

@@ -5,7 +5,7 @@ import { GridOptions } from 'ag-grid-community';
 import { Order, OrderData } from 'src/app/shared/order/order.model';
 import { OrderService } from 'src/app/shared/order/order.service';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
-import { OrderEditComponent } from './order-edit/order-edit.component';
+import { OrderEditComponent } from './boq-edit/order-edit.component';
 
 @Component({
   selector: 'app-section-orders',
