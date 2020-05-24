@@ -3,7 +3,7 @@
     <div class="card-deck">
       <div class="card mb-3 shadow card-theme">
         <div class="card-header card-header-theme">
-          <h5 class="heading-text">Daily Orders</h5>
+          <h5 class="heading-text">Daily Progress</h5>
         </div>
         <div class="card-body">
           <app-bar-chart></app-bar-chart>
@@ -11,7 +11,7 @@
       </div>
       <div class="card mb-3 shadow card-theme">
         <div class="card-header card-header-theme">
-          <h5 class="heading-text">Orders by Customer</h5>
+          <h5 class="heading-text">Project Completion</h5>
         </div>
         <div class="card-body">
           <app-pie-chart *ngIf='orderDataByCustomer' [inputData]='orderDataByCustomer' [limit]='3'></app-pie-chart>
@@ -19,7 +19,7 @@
       </div>
       <div class="card mb-3 shadow card-theme">
         <div class="card-header card-header-theme">
-          <h5 class="heading-text">Orders by State</h5>
+          <h5 class="heading-text">BOQ Completion</h5>
         </div>
         <div class="card-body">
           <app-pie-chart *ngIf='orderDataByState' [inputData]='orderDataByState' [limit]='5'></app-pie-chart>
@@ -30,7 +30,7 @@
   <div class="row-fluid cards">
     <div class="card shadow card-theme">
       <div class="card-header card-header theme">
-        <h5 class="heading-text">Monthly Sales by Product</h5>
+        <h5 class="heading-text">Monthly Progress</h5>
       </div>
       <div class="card-body">
         <app-line-chart></app-line-chart>
