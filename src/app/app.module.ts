@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SectionSalesComponent } from './sections/section-Dashboard/section-sales.component';
-import { SectionOrdersComponent } from './sections/section-Boq/section-orders.component';
+import { SectionBoqComponent } from './sections/section-Boq/section-boq.component';
 import { SectionProjectComponent } from './sections/section-project/section-project.component';
 import { BarChartComponent } from './charts/bar-chart/bar-chart.component';
 import { LineChartComponent } from './charts/line-chart/line-chart.component';
@@ -18,7 +18,7 @@ import { ServerComponent } from './server/server/server.component';
 import { ButtonRendererComponent } from './common/renderer/button-renderer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material-module';
-import { OrderEditComponent } from './sections/section-Boq/boq-edit/order-edit.component';
+import { BoqEditComponent } from './sections/section-Boq/boq-edit/boq-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,13 +26,13 @@ import { OrderEditComponent } from './sections/section-Boq/boq-edit/order-edit.c
     NavbarComponent,
     SidebarComponent,
     SectionSalesComponent,
-    SectionOrdersComponent,
+    SectionBoqComponent,
     SectionProjectComponent,
     BarChartComponent,
     LineChartComponent,
     PieChartComponent,
     ServerComponent,
-    OrderEditComponent,
+    BoqEditComponent,
   ],
   imports: [
     BrowserModule, 

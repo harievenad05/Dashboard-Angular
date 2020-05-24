@@ -6,7 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ButtonRendererComponent } from 'src/app/common/renderer/button-renderer.component';
 import { GridOptions } from 'ag-grid-community';
 import * as moment from 'moment';
-import { OrderEditComponent } from '../section-Boq/boq-edit/order-edit.component';
+import { BoqEditComponent } from '../section-Boq/boq-edit/boq-edit.component';
 
 @Component({
   selector: 'app-section-health',
@@ -115,7 +115,7 @@ export class SectionProjectComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = "50%";
     dialogConfig.data = {id}
-    this.dialog.open(OrderEditComponent, dialogConfig)
+    this.dialog.open(BoqEditComponent, dialogConfig)
   }
 
   onDeleteBtnClick(e){

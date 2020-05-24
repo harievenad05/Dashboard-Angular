@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SectionOrdersComponent } from './section-orders.component';
+import { BoqEditComponent } from './boq-edit.component';
 
-describe('SectionOrdersComponent', () => {
-  let component: SectionOrdersComponent;
-  let fixture: ComponentFixture<SectionOrdersComponent>;
+describe('OrderEditComponent', () => {
+  let component: BoqEditComponent;
+  let fixture: ComponentFixture<BoqEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SectionOrdersComponent ]
+      declarations: [ BoqEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SectionOrdersComponent);
+    fixture = TestBed.createComponent(BoqEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

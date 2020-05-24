@@ -5,14 +5,14 @@ import { GridOptions } from 'ag-grid-community';
 import { Order, OrderData } from 'src/app/shared/order/order.model';
 import { OrderService } from 'src/app/shared/order/order.service';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
-import { OrderEditComponent } from './boq-edit/order-edit.component';
+import { BoqEditComponent } from './boq-edit/boq-edit.component';
 
 @Component({
   selector: 'app-section-orders',
-  templateUrl: './section-orders.component.html',
-  styleUrls: ['./section-orders.component.scss'],
+  templateUrl: './section-boq.component.html',
+  styleUrls: ['./section-boq.component.scss'],
 })
-export class SectionOrdersComponent implements OnInit {
+export class SectionBoqComponent implements OnInit {
 
   columnDefs = [
     {headerName: 'ID', field: 'order_id', sortable: true, filter: true, autoHeight: true,  width: 80, suppressSizeToFit: false},
@@ -114,7 +114,7 @@ export class SectionOrdersComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = "50%";
     dialogConfig.data = {id}
-    this.dialog.open(OrderEditComponent, dialogConfig)
+    this.dialog.open(BoqEditComponent, dialogConfig)
   }
 
   onDeleteBtnClick(e){

@@ -3,14 +3,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-order-edit',
-  templateUrl: './order-edit.component.html',
-  styleUrls: ['./order-edit.component.scss']
+  templateUrl: './boq-edit.component.html',
+  styleUrls: ['./boq-edit.component.scss']
 })
-export class OrderEditComponent implements OnInit {
+export class BoqEditComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
-    public dialogRef: MatDialogRef<OrderEditComponent>
+    public dialogRef: MatDialogRef<BoqEditComponent>
   ) { }
 
   ngOnInit(): void {
