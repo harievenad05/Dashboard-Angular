@@ -18,6 +18,7 @@ import { ServerComponent } from './server/server/server.component';
 import { ButtonRendererComponent } from './common/renderer/button-renderer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material-module';
+import { OrderEditComponent } from './sections/section-orders/order-edit/order-edit.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { MaterialModule } from './shared/material-module';
     LineChartComponent,
     PieChartComponent,
     ServerComponent,
+    OrderEditComponent,
   ],
   imports: [
     BrowserModule, 

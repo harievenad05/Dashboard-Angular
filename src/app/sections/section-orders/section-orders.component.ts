@@ -4,6 +4,8 @@ import { ButtonRendererComponent } from 'src/app/common/renderer/button-renderer
 import { GridOptions } from 'ag-grid-community';
 import { Order, OrderData } from 'src/app/shared/order/order.model';
 import { OrderService } from 'src/app/shared/order/order.service';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { OrderEditComponent } from './order-edit/order-edit.component';
 
 @Component({
   selector: 'app-section-orders',
@@ -48,7 +50,7 @@ export class SectionOrdersComponent implements OnInit {
   defaultColDef: any;
   gridApi: any;
 
-  constructor(private orderService: OrderService){
+  constructor(private orderService: OrderService, private dialog: MatDialog){
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
     }
@@ -107,7 +109,10 @@ export class SectionOrdersComponent implements OnInit {
 
   onEditBtnClick(e) {
     console.log(e.rowData); 
-    alert(e.rowData.name);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "50%";
+    this.dialog.open(OrderEditComponent, dialogConfig)
   }
 
   onDeleteBtnClick(e){
