@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SectionSalesComponent } from './sections/section-sales/section-sales.component';
+import { SectionSalesComponent } from './sections/section-Dashboard/section-sales.component';
 import { SectionHealthComponent } from './sections/section-health/section-health.component';
 import { SectionOrdersComponent } from './sections/section-orders/section-orders.component';
 
