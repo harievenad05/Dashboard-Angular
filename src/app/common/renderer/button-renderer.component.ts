@@ -33,7 +33,7 @@ export class ButtonRendererComponent implements ICellRendererAngularComp {
         rowData: this.params.node.data
         // ...something
       }
-      console.log(params.rowData.name, params.event.rowIndex)
+      console.log(params.rowData.name)
       this.params.onEditClick(params);
     }
   }

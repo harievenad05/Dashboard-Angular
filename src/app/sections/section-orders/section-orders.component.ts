@@ -109,9 +109,11 @@ export class SectionOrdersComponent implements OnInit {
 
   onEditBtnClick(e) {
     console.log(e.rowData); 
+    const id = e.rowData.order_id
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "50%";
+    dialogConfig.data = {id}
     this.dialog.open(OrderEditComponent, dialogConfig)
   }
 
